@@ -15,6 +15,6 @@ use App\Http\Controllers\AuthorController;
 |
 */
 
-Route::prefix('v1')->group(function () {
+Route::prefix('v1')->middleware('api')->group(function () {
     Route::apiResource('authors', AuthorController::class);
 });
