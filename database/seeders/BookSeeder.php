@@ -16,11 +16,12 @@ class BookSeeder extends Seeder
     {
         $faker = Faker::create();
         $authorIds = Author::pluck('id')->toArray();
+        $authorCount = count($authorIds);
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 300; $i++) {
             Book::create([
                 'title' => $faker->sentence,
-                'author_id' => $faker->randomElement($authorIds),
+                'author_id' => $authorIds[$i % $authorCount],
                 'description' => $faker->paragraph,
                 'publish_date' => $faker->date
             ]);
