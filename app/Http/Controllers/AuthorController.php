@@ -6,6 +6,8 @@ use App\Exceptions\ItemNotFoundException;
 use App\Repositories\Interfaces\AuthorRepositoryInterface;
 use App\Http\Requests\AuthorQueryRequest;
 use App\Http\Requests\AuthorRequest;
+use App\Http\Resources\AuthorCollection;
+use App\Http\Resources\AuthorResource;
 
 
 class AuthorController extends Controller
@@ -19,7 +21,8 @@ class AuthorController extends Controller
 
     public function index(AuthorQueryRequest $request)
     {
-        return $this->authorRepository->all($request);
+        $authors = $this->authorRepository->all($request);
+        return new AuthorCollection($authors);
     }
 
     public function show($id)
@@ -27,12 +30,13 @@ class AuthorController extends Controller
         $author = $this->authorRepository->find($id);
         $author || throw new ItemNotFoundException(config('message.errors.author_not_found'));
 
-        return $author;
+        return new AuthorResource($author);
     }
 
     public function store(AuthorRequest $request)
     {
-        return $this->authorRepository->create($request->all());
+        $author = $this->authorRepository->create($request->all());
+        return new AuthorResource($author);
     }
 
     public function update($id, AuthorRequest $request)
@@ -40,7 +44,8 @@ class AuthorController extends Controller
         $author = $this->authorRepository->find($id);
         $author || throw new ItemNotFoundException(config('message.errors.author_not_found'));
     
-        return $this->authorRepository->update($id, $request->all());
+        $author = $this->authorRepository->update($id, $request->all());
+        return new AuthorResource($author);
     }
 
     public function destroy($id)
@@ -48,6 +53,7 @@ class AuthorController extends Controller
         $author = $this->authorRepository->find($id);
         $author || throw new ItemNotFoundException(config('message.errors.author_not_found'));
 
-        return $this->authorRepository->delete($id);
+        $this->authorRepository->delete($author);
+        return response()->noContent();
     }
 }
