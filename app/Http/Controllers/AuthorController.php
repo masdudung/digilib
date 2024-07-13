@@ -21,6 +21,11 @@ class AuthorController extends Controller
 
     public function index(AuthorQueryRequest $request)
     {
+        $request->mergeIfMissing([
+            'page' => 1,
+            'limit' => 10,
+        ]);
+        
         $queryString = $request->getQueryString();
         $cacheKey = 'authors_all_' . md5($queryString);
         $authors = Cache::remember($cacheKey, 90, function () use ($request) {

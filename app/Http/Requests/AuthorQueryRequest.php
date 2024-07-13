@@ -22,8 +22,8 @@ class AuthorQueryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'page' => 'required|integer|min:1',
-            'limit' => 'required|integer|min:1|max:100',
+            'page' => 'integer|min:1',
+            'limit' => 'integer|min:1|max:100',
             'sort' => 'string|in:name,birth_date',
             'order' => 'string|in:asc,desc',
             'search' => 'string|max:255',
