@@ -11,23 +11,27 @@ class AuthorRepository implements AuthorRepositoryInterface
 {
     public function all(Request $request): LengthAwarePaginator
     {
-        $query = Author::query();
+        $query = Author::select(['id', 'name', 'birthdate']);
 
         if ($request->has('search')) {
-            $query->where('name', 'like', '%' . $request->query('search') . '%');
+            $searchTerm = $request->query('search');
+            $query->where('name', 'like', '%' . $searchTerm . '%');
         }
 
         if ($request->has('sort') && $request->has('order')) {
-            $query->orderBy($request->query('sort'), $request->query('order'));
+            $sort = $request->query('sort');
+            $order = $request->query('order');
+            $query->orderBy($sort, $order);
         }
 
         $limit = $request->query('limit', 10);
+        
         return $query->paginate($limit);
     }
 
     public function find($id): ?Author
     {
-        return Author::findOrFail($id);
+        return Author::find($id) ?? null;
     }
 
     public function create(array $data): Author
@@ -35,16 +39,14 @@ class AuthorRepository implements AuthorRepositoryInterface
         return Author::create($data);
     }
 
-    public function update($id, array $data): Author
+    public function update(Author $author, array $data): Author
     {
-        $author = Author::findOrFail($id);
         $author->update($data);
         return $author;
     }
 
-    public function delete($id): bool
+    public function delete(Author $author): bool
     {
-        $author = Author::findOrFail($id);
         $author->delete();
         return true;
     }

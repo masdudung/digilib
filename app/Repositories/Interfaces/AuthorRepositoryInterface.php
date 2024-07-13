@@ -11,6 +11,6 @@ interface AuthorRepositoryInterface
     public function all(Request $request): LengthAwarePaginator;
     public function find($id): ?Author;
     public function create(array $data): Author;
-    public function update($id, array $data): Author;
-    public function delete($id): bool;
+    public function update(Author $author, array $data): Author;
+    public function delete(Author $author): bool;
 }
