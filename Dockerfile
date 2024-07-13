@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
+    sqlite3 \
+    libsqlite3-dev \
     zip \
     unzip \
     && pecl install redis \
@@ -31,8 +33,6 @@ COPY . /var/www/html
 
 # Copy existing application directory permissions
 COPY --chown=www-data:www-data . /var/www/html
-
-RUN chmod +x /var/www/html/entrypoint.sh
 
 # Install npm dependencies
 RUN npm install
