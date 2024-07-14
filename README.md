@@ -1,6 +1,14 @@
 # DIGILIB
 simple RESTful API for a library management system
 
+## Live API Endpoint
+Access the API endpoint at following link:
+[Books API](https://api-digilib.moveidn.com/api/v1/books?page=1&limit=10)
+[Authors API](https://api-digilib.moveidn.com/api/v1/authors?page=1&limit=10)
+
+Simple Test Result https://bit.ly/3VVFrGQ
+
+
 ## How To Install
 Assume we use docker, make sure it has been installed on your computer
 
@@ -25,6 +33,12 @@ Assume we use docker, make sure it has been installed on your computer
 - **Running Tests**
     
     `docker exec -it laravel_app php artisan test`
+
+- **ANY ERROR?**
+    
+    Sometime package predis cannot be found, reinstall with:
+
+    `docker exec -it laravel_app composer require predis/predis`
 
 ## API DOC
 Import this file into postman (check root repository) 
