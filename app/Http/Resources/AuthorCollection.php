@@ -17,7 +17,16 @@ class AuthorCollection extends ResourceCollection
         return [
             'success' => true,
             'message' => '',
-            'data' => $this->collection->toArray(),
+            'data' => $this->collection->transform(function($book) {
+                return [
+                    'id' => $book->id,
+                    'name' => $book->name,
+                    'bio' => $book->bio,
+                    'birthdate' => $book->birthdate,
+                    'created_at' => $book->created_at,
+                    'updated_at' => $book->updated_at,
+                ];
+            }),
         ];
     }
 }

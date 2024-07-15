@@ -26,7 +26,8 @@ class BookCollection extends ResourceCollection
                     'author' => [
                         'id' => $book->author->id,
                         'name' => $book->author->name,
-                        'email' => $book->author->email,
+                        'bio' => $book->author->bio,
+                        'birthdate' => $book->author->birthdate,
                     ],
                     'created_at' => $book->created_at,
                     'updated_at' => $book->updated_at,

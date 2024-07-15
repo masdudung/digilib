@@ -14,8 +14,8 @@ class BookRepository implements BookRepositoryInterface
      */
     public function all(Request $request): LengthAwarePaginator
     {
-        $query = Book::select(['id', 'title', 'author_id', 'publish_date'])
-                     ->with('author:id,name,birthdate');
+        $query = Book::select(['id', 'title', 'description', 'author_id', 'publish_date'])
+                     ->with('author:id,name,bio,birthdate');
 
         // Apply search filter if provided
         if ($request->has('search')) {
@@ -41,7 +41,7 @@ class BookRepository implements BookRepositoryInterface
      */
     public function find($id): ?Book
     {
-        return Book::with('author:id,name,birthdate')->find($id) ?? null;
+        return Book::with('author:id,name,bio,birthdate')->find($id) ?? null;
     }
 
     /**
@@ -50,7 +50,7 @@ class BookRepository implements BookRepositoryInterface
     public function create(array $data): Book
     {
         $book = Book::create($data);
-        $book->load('author:id,name,birthdate');
+        $book->load('author:id,name,bio,birthdate');
         return $book;
     }
 
@@ -60,7 +60,7 @@ class BookRepository implements BookRepositoryInterface
     public function update(Book $book, array $data): Book
     {
         $book->update($data);
-        $book->load('author:id,name,birthdate');
+        $book->load('author:id,name,bio,birthdate');
         return $book;
     }
 

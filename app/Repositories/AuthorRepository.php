@@ -14,7 +14,7 @@ class AuthorRepository implements AuthorRepositoryInterface
      */
     public function all(Request $request): LengthAwarePaginator
     {
-        $query = Author::select(['id', 'name', 'birthdate']);
+        $query = Author::select(['id', 'name', 'bio', 'birthdate']);
 
         // Apply search filter if provided
         if ($request->has('search')) {
