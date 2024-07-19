@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\RecipeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +19,6 @@ use App\Http\Controllers\BookController;
 Route::prefix('v1')->middleware('api')->group(function () {
     Route::apiResource('authors', AuthorController::class);
     Route::apiResource('books', BookController::class);
+
+    Route::get('recipe', [RecipeController::class, 'index'])->name('recipe.index');
 });
