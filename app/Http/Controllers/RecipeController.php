@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\OrderCreated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -357,7 +358,11 @@ class RecipeController extends Controller
 
     public function order(Request $request) {
         // Kirim email ke pengguna tentang detail order
-        Mail::to($request->email)->send(new OrderCreated($request->all()));
+        try {
+            Mail::to($request->email)->send(new OrderCreated($request->all()));
+        } catch (\Exception $e) {
+            Log::error('Gagal mengirim email order: ' . $e->getMessage());
+        }
 
         return response()->json([
             'status' => 'success',

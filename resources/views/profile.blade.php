@@ -47,6 +47,22 @@
             font-size: 18px;
             color: #666;
         }
+        .terms-condition {
+            padding: 20px;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin-top: 20px;
+        }
+        .terms-condition h3 {
+            margin: 10px 0;
+            font-size: 20px;
+            color: #333;
+        }
+        .terms-condition p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -58,4 +74,12 @@
             <h2>Nama: Moch Mufiddin</h2>
             <p>NIM: 22500085</p>
         </div>
-    </div
+        <div class="terms-condition">
+            <h3>Syarat dan Ketentuan Pemesanan Bahan Makanan</h3>
+            <p>1. Pembeli harus berusia minimal 18 tahun.</p>
+            <p>2. Pembeli harus mendaftar terlebih dahulu sebelum melakukan pemesanan.</p>
+            <p>3. Pembeli harus membaca dan menyetujui syarat dan ketentuan ini sebelum melakukan pemesanan.</p>
+            <p>4. Pembeli bertanggung jawab atas keakuratan data yang diberikan.</p>
+            <p>5. Pembeli tidak boleh menggunakan platform ini untuk tujuan yang tidak sah.</p>
+        </div>
+    </div>

@@ -21,5 +21,5 @@ Route::prefix('v1')->middleware('api')->group(function () {
     Route::apiResource('books', BookController::class);
 
     Route::get('recipe', [RecipeController::class, 'index'])->name('recipe.index');
-    Route::get('recipe/order', [RecipeController::class, 'order'])->name('recipe.post');
+    Route::post('recipe/order', [RecipeController::class, 'order'])->name('recipe.post');
 });
