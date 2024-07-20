@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -351,5 +352,13 @@ class RecipeController extends Controller
         ];
 
         return response()->json(['data' => $recipes]);
+    }
+
+    public function order(Request $request) {
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Order berhasil dibuat, silakan cek email anda untuk melihat detail order',
+            'request' => $request->all()
+        ]);
     }
 }
