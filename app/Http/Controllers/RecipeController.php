@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Client\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Mail\OrderCreated;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 
 class RecipeController extends Controller
@@ -355,6 +356,9 @@ class RecipeController extends Controller
     }
 
     public function order(Request $request) {
+        // Kirim email ke pengguna tentang detail order
+        Mail::to($request->email)->send(new OrderCreated($request->all()));
+
         return response()->json([
             'status' => 'success',
             'message' => 'Order berhasil dibuat, silakan cek email anda untuk melihat detail order',
